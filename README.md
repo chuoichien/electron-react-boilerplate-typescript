@@ -1,6 +1,6 @@
 # electron-react-boilerplate
 
-### A Boilerplate for Scalable Cross-Platform Desktop Apps
+### A Typescript Boilerplate for Scalable Cross-Platform Desktop Apps
 
 <br/>
 
