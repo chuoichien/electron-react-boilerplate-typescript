@@ -1,14 +1,14 @@
 import {createStore, applyMiddleware, compose} from 'redux';
 import thunk from 'redux-thunk';
-import { hashHistory } from 'react-router';
-import { createHistory } from 'history';
+import {  } from 'react-router';
+import { createBrowserHistory } from 'history';
 import { routerMiddleware, push } from 'react-router-redux';
-import * as createLogger from 'redux-logger';
+import { createLogger } from 'redux-logger';
 import rootReducer from '../reducers';
 import * as counterActions from '../actions/counter';
 import { counterStateType } from '../reducers/counter';
 
-const history = createHistory();
+const history = createBrowserHistory();
 
 declare const window : Window & {
 	__REDUX_DEVTOOLS_EXTENSION_COMPOSE__? (a : any) : typeof compose;
@@ -36,8 +36,7 @@ const configureStore = (initialState? : counterStateType) => {
   middleware.push(logger);
 
   // Router Middleware
-  const router = routerMiddleware(hashHistory);
-  middleware.push(router);
+  middleware.push(routerMiddleware(history));
 
   // Redux DevTools Configuration
 	const actionCreators = Object.assign({}, counterActions, {
