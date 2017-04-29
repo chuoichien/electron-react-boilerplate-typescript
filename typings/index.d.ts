@@ -5,12 +5,6 @@
 declare module '*.scss';
 declare module '*.css';
 
-declare module JSX {
-	interface IntrinsicElements {
-		"webview": any
-	}
-}
-
 declare interface NodeModule {
 	hot: {
 		accept(dependencies: string[], callback: (updatedDependencies: string[]) => void): void;
