@@ -5,10 +5,10 @@
   "description": "Electron application boilerplate based on React, React Router, Webpack, React Hot Loader for rapid application development",
   "main": "main.js",
   "scripts": {
-    "test": "cross-env NODE_ENV=test BABEL_DISABLE_CACHE=1 node --trace-warnings ./test/runTests.js",
+    "test": "cross-env NODE_ENV=test BABEL_DISABLE_CACHE=1 ts-node ./test/runTests.ts",
     "test-all": "npm run lint && npm run flow && npm run test && npm run build && npm run test-e2e",
     "test-watch": "npm test -- --watch",
-    "test-e2e": "cross-env NODE_ENV=test BABEL_DISABLE_CACHE=1 node --trace-warnings ./test/runTests.js e2e",
+    "test-e2e": "cross-env NODE_ENV=test BABEL_DISABLE_CACHE=1 ts-node ./test/runTests.ts e2e",
     "lint": "eslint --cache --format=node_modules/eslint-formatter-pretty .",
     "lint-fix": "npm run lint -- --fix",
     "lint-styles": "stylelint app/*.css app/components/*.css --syntax scss",
@@ -103,14 +103,21 @@
       "\\.(css|less|sass|scss)$": "identity-obj-proxy"
     },
     "moduleFileExtensions": [
-      "js"
+      "js",
+      "jsx",
+      "json",
+      "ts",
+      "tsx"
+    ],
+    "testMatch": [
+      "**/__tests__/**/*.(js?(x)|ts?(x))", "**/?(*.)(spec|test).(js?(x)|ts?(x))"
     ],
     "moduleDirectories": [
       "node_modules",
       "app/node_modules"
     ],
     "transform": {
-      "^.+\\.js$": "babel-jest"
+      "^.+\\.tsx?$": "typescript-babel-jest"
     }
   },
   "devDependencies": {
@@ -197,6 +204,7 @@
     "ts-loader": "^2.0.3",
     "ts-node": "^3.0.2",
     "typescript": "^2.3.2",
+    "typescript-babel-jest": "^1.0.3",
     "url-loader": "^0.5.8",
     "webpack": "^2.4.1",
     "webpack-bundle-analyzer": "^2.4.0",
