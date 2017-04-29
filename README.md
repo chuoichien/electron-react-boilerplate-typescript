@@ -217,7 +217,7 @@ see discusses in [#118](https://github.com/chentsulin/electron-react-boilerplate
 If your application is a fork from this repo, you can add this repo to another git remote:
 
 ```sh
-git remote add upstream https://github.com/chentsulin/electron-react-boilerplate.git
+git remote add upstream https://github.com/kevupton/electron-react-boilerplate-typescript.git
 ```
 
 Then, use git to merge some latest commits:
