@@ -1,10 +1,11 @@
 // @flow
-import { app, Menu, shell, BrowserWindow } from 'electron';
+import { app, Menu, shell } from 'electron';
+import BrowserWindow = Electron.BrowserWindow;
 
 export default class MenuBuilder {
-  mainWindow: BrowserWindow;
+  mainWindow : BrowserWindow;
 
-  constructor(mainWindow: BrowserWindow) {
+  constructor(mainWindow : BrowserWindow) {
     this.mainWindow = mainWindow;
   }
 
@@ -21,22 +22,22 @@ export default class MenuBuilder {
       template = this.buildDefaultTemplate();
     }
 
-    const menu = Menu.buildFromTemplate(template);
+    const menu = Menu.buildFromTemplate((<any>template));
     Menu.setApplicationMenu(menu);
 
     return menu;
   }
 
   setupDevelopmentEnvironment() {
-    this.mainWindow.openDevTools();
-    this.mainWindow.webContents.on('context-menu', (e, props) => {
+    this.mainWindow.webContents.openDevTools();
+    this.mainWindow.webContents.on('context-menu', (e : any, props : any) => {
       const { x, y } = props;
 
       Menu
         .buildFromTemplate([{
           label: 'Inspect element',
           click: () => {
-            this.mainWindow.inspectElement(x, y);
+            this.mainWindow.webContents.inspectElement(x, y);
           }
         }])
         .popup(this.mainWindow);
@@ -75,7 +76,7 @@ export default class MenuBuilder {
       submenu: [
         { label: 'Reload', accelerator: 'Command+R', click: () => { this.mainWindow.webContents.reload(); } },
         { label: 'Toggle Full Screen', accelerator: 'Ctrl+Command+F', click: () => { this.mainWindow.setFullScreen(!this.mainWindow.isFullScreen()); } },
-        { label: 'Toggle Developer Tools', accelerator: 'Alt+Command+I', click: () => { this.mainWindow.toggleDevTools(); } }
+        { label: 'Toggle Developer Tools', accelerator: 'Alt+Command+I', click: () => { this.mainWindow.webContents.toggleDevTools(); } }
       ]
     };
     const subMenuViewProd = {
@@ -147,7 +148,7 @@ export default class MenuBuilder {
         label: 'Toggle &Developer Tools',
         accelerator: 'Alt+Ctrl+I',
         click: () => {
-          this.mainWindow.toggleDevTools();
+          this.mainWindow.webContents.toggleDevTools();
         }
       }] : [{
         label: 'Toggle &Full Screen',

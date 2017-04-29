@@ -1,8 +1,8 @@
 import { spy } from 'sinon';
-import React from 'react';
+import * as React from 'react';
 import { shallow } from 'enzyme';
 import { BrowserRouter as Router } from 'react-router-dom';
-import renderer from 'react-test-renderer';
+import * as renderer from 'react-test-renderer';
 import Counter from '../../app/components/Counter';
 
 function setup() {

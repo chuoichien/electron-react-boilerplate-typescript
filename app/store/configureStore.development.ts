@@ -1,25 +1,35 @@
-import { createStore, applyMiddleware, compose } from 'redux';
+import {createStore, applyMiddleware, compose} from 'redux';
 import thunk from 'redux-thunk';
-import { hashHistory } from 'react-router-dom';
-import { createBrowserHistory } from 'history';
+import { hashHistory } from 'react-router';
+import { createHistory } from 'history';
 import { routerMiddleware, push } from 'react-router-redux';
-import { createLogger } from 'redux-logger';
+import * as createLogger from 'redux-logger';
 import rootReducer from '../reducers';
 import * as counterActions from '../actions/counter';
-import type { counterStateType } from '../reducers/counter';
+import { counterStateType } from '../reducers/counter';
 
-const history = createBrowserHistory();
+const history = createHistory();
 
-const configureStore = (initialState: ?counterStateType) => {
+declare const window : Window & {
+	__REDUX_DEVTOOLS_EXTENSION_COMPOSE__? (a : any) : typeof compose;
+};
+
+declare const module: NodeModule & {
+	hot?: {
+		accept(...args: any[]): any;
+	}
+};
+
+const configureStore = (initialState? : counterStateType) => {
   // Redux Configuration
-  const middleware = [];
-  const enhancers = [];
+  const middleware : any[] = [];
+  const enhancers : any[] = [];
 
   // Thunk Middleware
   middleware.push(thunk);
 
   // Logging Middleware
-  const logger = createLogger({
+  const logger = (<any>createLogger)({
     level: 'info',
     collapsed: true
   });
@@ -30,13 +40,13 @@ const configureStore = (initialState: ?counterStateType) => {
   middleware.push(router);
 
   // Redux DevTools Configuration
-  const actionCreators = {
-    ...counterActions,
-    push,
-  };
-  // If Redux DevTools Extension is installed use it, otherwise use Redux compose
+	const actionCreators = Object.assign({}, counterActions, {
+		push
+	});
+
+	// If Redux DevTools Extension is installed use it, otherwise use Redux compose
   /* eslint-disable no-underscore-dangle */
-  const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
+  const composeEnhancers : typeof compose = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
     ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({
       // Options: http://zalmoxisus.github.io/redux-devtools-extension/API/Arguments.html
       actionCreators,
@@ -46,10 +56,10 @@ const configureStore = (initialState: ?counterStateType) => {
 
   // Apply Middleware & Compose Enhancers
   enhancers.push(applyMiddleware(...middleware));
-  const enhancer = composeEnhancers(...enhancers);
+  const enhancer = (<any>composeEnhancers)(...enhancers);
 
   // Create Store
-  const store = createStore(rootReducer, initialState, enhancer);
+  const store = (<any>createStore)(rootReducer, initialState, enhancer);
 
   if (module.hot) {
     module.hot.accept('../reducers', () =>

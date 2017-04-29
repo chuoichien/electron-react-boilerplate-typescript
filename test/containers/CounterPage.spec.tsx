@@ -1,14 +1,15 @@
-import React from 'react';
+import * as React from 'react';
 import { mount } from 'enzyme';
 import { Provider } from 'react-redux';
-import { createBrowserHistory } from 'history';
+import { createHistory } from 'history';
 import { ConnectedRouter } from 'react-router-redux';
 import CounterPage from '../../app/containers/CounterPage';
 import { configureStore } from '../../app/store/configureStore';
+import {counterStateType} from "../../app/reducers/counter";
 
-function setup(initialState) {
+function setup(initialState? : counterStateType) {
   const store = configureStore(initialState);
-  const history = createBrowserHistory();
+  const history = createHistory();
   const app = mount(
     <Provider store={store}>
       <ConnectedRouter history={history}>
