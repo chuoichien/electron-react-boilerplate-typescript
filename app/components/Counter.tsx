@@ -11,7 +11,7 @@ export interface ICounterProps {
 	counter: number
 }
 
-class Counter extends React.Component<ICounterProps, void> {
+export class Counter extends React.Component<ICounterProps, void> {
   render() {
     const { increment, incrementIfOdd, incrementAsync, decrement, counter } = this.props;
     return (
@@ -38,5 +38,3 @@ class Counter extends React.Component<ICounterProps, void> {
     );
   }
 }
-
-export default Counter;

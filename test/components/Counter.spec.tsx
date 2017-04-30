@@ -3,7 +3,7 @@ import * as React from 'react';
 import { shallow } from 'enzyme';
 import { BrowserRouter as Router } from 'react-router-dom';
 import * as renderer from 'react-test-renderer';
-import Counter from '../../app/components/Counter';
+import { Counter } from '../../app/components/Counter';
 
 function setup() {
   const actions = {

@@ -4,7 +4,7 @@ import {  } from 'react-router';
 import { createBrowserHistory } from 'history';
 import { routerMiddleware, push } from 'react-router-redux';
 import { createLogger } from 'redux-logger';
-import rootReducer from '../reducers';
+import { rootReducer } from '../reducers';
 import * as counterActions from '../actions/counter';
 import { counterStateType } from '../reducers/counter';
 
