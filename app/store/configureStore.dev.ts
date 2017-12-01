@@ -1,14 +1,13 @@
-import {createStore, applyMiddleware, compose} from 'redux';
+import { createStore, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';
-import {  } from 'react-router';
-import { createBrowserHistory } from 'history';
-import { routerMiddleware, push } from 'react-router-redux';
+import { createHashHistory } from 'history';
+import { routerMiddleware, routerActions } from 'react-router-redux';
 import { createLogger } from 'redux-logger';
 import { rootReducer } from '../reducers';
 import * as counterActions from '../actions/counter';
 import { counterStateType } from '../reducers/counter';
 
-const history = createBrowserHistory();
+const history = createHashHistory();
 
 declare const window : Window & {
 	__REDUX_DEVTOOLS_EXTENSION_COMPOSE__? (a : any) : typeof compose;
@@ -29,23 +28,24 @@ const configureStore = (initialState? : counterStateType) => {
   middleware.push(thunk);
 
   // Logging Middleware
-  const logger = (<any>createLogger)({
+  const logger = createLogger({
     level: 'info',
     collapsed: true
   });
   middleware.push(logger);
 
   // Router Middleware
-  middleware.push(routerMiddleware(history));
+  const router = routerMiddleware(history);
+  middleware.push(router);
 
   // Redux DevTools Configuration
-	const actionCreators = Object.assign({}, counterActions, {
-		push
-	});
-
-	// If Redux DevTools Extension is installed use it, otherwise use Redux compose
+  const actionCreators = {
+    ...counterActions,
+    ...routerActions,
+  };
+  // If Redux DevTools Extension is installed use it, otherwise use Redux compose
   /* eslint-disable no-underscore-dangle */
-  const composeEnhancers : typeof compose = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
+  const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
     ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({
       // Options: http://zalmoxisus.github.io/redux-devtools-extension/API/Arguments.html
       actionCreators,
