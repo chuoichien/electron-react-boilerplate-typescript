@@ -1,4 +1,4 @@
-# electron-react-boilerplate
+# electron-react-boilerplate-typescript
 
 ### A Typescript Boilerplate for Scalable Cross-Platform Desktop Apps
 
