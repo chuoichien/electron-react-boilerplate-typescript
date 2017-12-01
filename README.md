@@ -1,5 +1,7 @@
 # electron-react-boilerplate-typescript
 
+## Node 8.9.1
+
 ### A Typescript Boilerplate for Scalable Cross-Platform Desktop Apps
 
 <br/>
