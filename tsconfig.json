@@ -14,14 +14,13 @@
 
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
+    "allowSyntheticDefaultImports": true,
 
     "sourceMap": true,
-
+    "lib": ["es2015", "es2017", "es2016", "dom"],
     "outDir": "dist"
   },
-  "files": [
-    "app/index.tsx"
-  ],
+  "files": ["app/index.tsx"],
   "include": [
     "app/**/*.ts",
     "app/**/*.tsx",
@@ -29,8 +28,5 @@
     "test/**/*.tsx",
     "typings/index.d.ts"
   ],
-  "exclude": [
-    "node_modules",
-    "dist"
-  ]
+  "exclude": ["node_modules", "dist"]
 }

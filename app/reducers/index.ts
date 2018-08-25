@@ -5,5 +5,5 @@ import { counter } from './counter';
 
 export const rootReducer = combineReducers({
   counter,
-  router,
+  router
 });

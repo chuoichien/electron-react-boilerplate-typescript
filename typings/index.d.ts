@@ -3,6 +3,7 @@
 // declaration.d.ts
 declare module '*.scss';
 declare module '*.css';
+declare module '*.json';
 
 declare interface NodeModule {
 	hot: {

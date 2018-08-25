@@ -1,16 +1,16 @@
 // @flow
 import { createStore, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
-import { createBrowserHistory } from 'history';
+import { createHashHistory } from 'history';
 import { routerMiddleware } from 'react-router-redux';
 import { rootReducer } from '../reducers';
-import { counterStateType } from '../reducers/counter';
+import { counterStateType } from '../reducers/types';
 
-const history = createBrowserHistory();
+const history = createHashHistory();
 const router = routerMiddleware(history);
 const enhancer = applyMiddleware(thunk, router);
 
-function configureStore(initialState? : counterStateType) {
+function configureStore(initialState : counterStateType) {
   return createStore(rootReducer, initialState, enhancer);
 }
 

@@ -2,15 +2,14 @@
 import * as React from 'react';
 import { Link } from 'react-router-dom';
 import * as styles from './Home.css';
+import * as routes from '../constants/routes.json';
 
-export class Home extends React.Component<{}, {}> {
+export class Home extends React.Component {
   render() {
     return (
-      <div>
-        <div className={styles.container} data-tid="container">
-          <h2>Home</h2>
-          <Link to="/counter">to Counter</Link>
-        </div>
+      <div className={styles.container} data-tid="container">
+        <h2>Home</h2>
+        <Link to={routes.COUNTER}>to Counter</Link>
       </div>
     );
   }
